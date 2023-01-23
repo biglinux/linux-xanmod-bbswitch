@@ -18,9 +18,9 @@ groups=("$_linuxprefix-extramodules")
 install=bbswitch.install
 source=("$pkgname-$pkgver.tar.gz::https://github.com/Bumblebee-Project/bbswitch/archive/v${pkgver}.tar.gz"
         'kernel57.patch' 'kernel518.patch')
-sha256sums=(SKIP SKIP SKIP)
-
-
+sha256sums=('76cabd3f734fb4fe6ebfe3ec9814138d0d6f47d47238521ecbd6a986b60d1477'
+            '3b8039f3cd32d2aa8ad0b2426f28faac218eacd134c1e39454c9feca9d612789'
+            '04061ecbee433de137d8e68cd42271a30c172bb87829cf350d50df1b24414139')
 
 prepare() {
   cd ${_pkgname}-${pkgver}
