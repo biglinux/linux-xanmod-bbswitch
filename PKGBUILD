@@ -2,11 +2,11 @@
 # Maintainer: Philip Müller <philm[at]manjaro[dot]org>
 
 _linuxprefix=linux-xanmod
-_extramodules=$(find /usr/lib/modules -type d -iname 6.2.7*xanmod* | rev | cut -d "/" -f1 | rev)
+_extramodules=$(find /usr/lib/modules -type d -iname 6.2.8*xanmod* | rev | cut -d "/" -f1 | rev)
 pkgname=$_linuxprefix-bbswitch
 _pkgname=bbswitch
 pkgver=0.8
-pkgrel=6271
+pkgrel=6281
 pkgdesc="kernel module allowing to switch dedicated graphics card on Optimus laptops"
 arch=('x86_64')
 url="http://github.com/Bumblebee-Project/bbswitch"
@@ -29,7 +29,7 @@ prepare() {
 }
 
 build() {
-  _kernver=$(find /usr/lib/modules -type d -iname 6.2.7*xanmod* | rev | cut -d "/" -f1 | rev)
+  _kernver=$(find /usr/lib/modules -type d -iname 6.2.8*xanmod* | rev | cut -d "/" -f1 | rev)
 
   cd ${_pkgname}-${pkgver}
   # KDIR is necessary even when cleaning
