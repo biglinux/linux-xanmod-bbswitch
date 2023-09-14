@@ -2,11 +2,11 @@
 # Maintainer: Philip Müller <philm[at]manjaro[dot]org>
 
 _linuxprefix=linux-xanmod
-_extramodules=$(find /usr/lib/modules -type d -iname 6.4.15*xanmod* | rev | cut -d "/" -f1 | rev)
+_extramodules=$(find /usr/lib/modules -type d -iname 6.5.3*xanmod* | rev | cut -d "/" -f1 | rev)
 pkgname=$_linuxprefix-bbswitch
 _pkgname=bbswitch
 pkgver=0.8
-pkgrel=64151
+pkgrel=65310
 pkgdesc="kernel module allowing to switch dedicated graphics card on Optimus laptops"
 arch=('x86_64')
 url="http://github.com/Bumblebee-Project/bbswitch"
@@ -29,7 +29,7 @@ prepare() {
 }
 
 build() {
-  _kernver=$(find /usr/lib/modules -type d -iname 6.4.15*xanmod* | rev | cut -d "/" -f1 | rev)
+  _kernver=$(find /usr/lib/modules -type d -iname 6.5.3*xanmod* | rev | cut -d "/" -f1 | rev)
 
   cd ${_pkgname}-${pkgver}
   # KDIR is necessary even when cleaning
@@ -38,7 +38,7 @@ build() {
 
 package() {
   cd ${_pkgname}-${pkgver}
-  install -D -m644 bbswitch.ko $pkgdir/usr/lib/modules/${_extramodules}/bbswitch.ko
+  install -D -m 644 bbswitch.ko $pkgdir/usr/lib/modules/${_extramodules}/bbswitch.ko
   # gzip -9 modules
   find "$pkgdir" -name '*.ko' -exec gzip -9 {} \;
   sed -i -e "s/EXTRAMODULES=.*/EXTRAMODULES=${_extramodules}/g" $startdir/*.install
