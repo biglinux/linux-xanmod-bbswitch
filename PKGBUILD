@@ -6,7 +6,7 @@ _kernver="$(cat /usr/src/${_linuxprefix}/version)"
 pkgname=$_linuxprefix-bbswitch
 _pkgname=bbswitch
 pkgver=0.8
-pkgrel=66161
+pkgrel=67510
 pkgdesc="kernel module allowing to switch dedicated graphics card on Optimus laptops"
 arch=('x86_64')
 url="http://github.com/Bumblebee-Project/bbswitch"
@@ -23,8 +23,15 @@ sha256sums=('76cabd3f734fb4fe6ebfe3ec9814138d0d6f47d47238521ecbd6a986b60d1477'
 
 prepare() {
   cd ${_pkgname}-${pkgver}
-  patch -p1 -i ../kernel57.patch
-  patch -p1 -i ../kernel518.patch
+
+  local src
+  for src in "${source[@]}"; do
+      src="${src%%::*}"
+      src="${src##*/}"
+      [[ $src = *.patch ]] || continue
+      msg2 "Applying patch: $src..."
+      patch -Np1 < "../$src"
+  done
 }
 
 build() {
